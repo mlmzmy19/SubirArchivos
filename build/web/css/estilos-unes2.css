@@ -1,0 +1,238 @@
+.tbl_Title_col {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: F00000;
+	text-align: center;
+	vertical-align: middle;
+}
+.tbl_Title_col_nar {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: FE7D00;
+	text-align: center;
+	vertical-align: middle;
+}
+.tbl_Title_col_azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: 00AEF7;
+	text-align: center;
+	vertical-align: middle;
+}
+.tbl_title_table {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #F00000;
+}
+.tbl_title_table_nar {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: FE7D00;
+}
+.tbl_title_table_azul {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	text-align: center;
+	vertical-align: middle;
+	background-color: 00AEF7;
+	border: none;
+}
+.txt_lista {
+	text-align: left;
+}
+.link_pag {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: 840300;
+	text-decoration: underline;
+}
+.lbl_detalle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: 494B49;
+	background-color: CECFCE;
+	vertical-align: middle;
+	height: 15px;
+	width: auto;
+	text-align: center;
+}
+.txtDetalle {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #840300;
+	text-align: left;
+	font-style: normal;
+}
+.txtDetalle2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: 494B49;
+	text-align: left;
+	font-style: normal;
+}
+.lbl_campo {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #840300;
+	text-align: left;
+	font-style: normal;
+	line-height: 30px;
+	text-indent: 10pt;
+	vertical-align: middle;
+}
+.lbl_campo_gris {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: 494B49;
+	text-align: left;
+	font-style: normal;
+	line-height: 30px;
+	text-indent: 10pt;
+	vertical-align: middle;
+}
+.txt_user {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: capitalize;
+	color: #333333;
+	background-position: left center;
+	word-spacing: 0.3em;
+	letter-spacing: 0.15em;
+}
+
+.txt_paginacion {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-transform: capitalize;
+	color: #333333;
+	background-position: left center;
+	word-spacing: 0.3em;
+	letter-spacing: 0.1em;
+	font-style: normal;
+}
+
+.txtfooter_1{
+	font:Arial, Helvetica, sans-serif;
+	color:#8F8F8F;
+	font-size: 10px;
+}
+.tbl_Title_col_seg {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #006699 ;
+	text-align: center;
+	vertical-align: middle;
+}
+.tbl_title_table_seg {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #006699;
+}
+.txtDetalle_seg {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #003366;
+	text-align: left;
+	font-style: normal;
+}
+.tbl_Title_col_con {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	background-color: #FFFF00;
+	text-align: center;
+	vertical-align: middle;
+}
+.tbl_title_table_con {
+
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #000000;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #FFFF00;
+}
+.txtDetalle_con {
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	color: #333333;
+	text-align: left;
+	font-style: normal;
+}
+
+.reporte_del{
+	font-family: Verdana;
+	font-size: 11px;
+	font-weight: normal;
+	color: #003366;
+}
+
+

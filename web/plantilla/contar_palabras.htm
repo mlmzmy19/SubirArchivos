@@ -1,0 +1,45 @@
+<html> 
+<head> 
+    <title>Untitled</title> 
+    <style> 
+    textarea{ 
+    overflow:auto; 
+    text-align:justify; 
+    } 
+    input{text-align:right;} 
+     
+    input,textarea{ 
+    border:solid 1px black; 
+    font:normal 10px/15px verdana; 
+    color:navy; 
+    } 
+    </style> 
+    <script> 
+//  Contador de palabras 
+//  Script de Karlankas para forosdelweb.com 
+//  http://www.karlankas.net     
+    minimoLetras=1;//Cuantas letras tiene que tener como mínimo la palabra para ser contabilizada 
+    function contar(esto){ 
+    if(esto.value.charAt(esto.value.length-1)==" "){ 
+    numeroDePalabras=0; 
+    textos=esto.value; 
+    palabras=textos.split(""); 
+    for(a=0;a<palabras.length;a++){ 
+    if(palabras[a].length>=minimoLetras){ 
+    numeroDePalabras+=1; 
+    } 
+    } 
+    document.forms['pepe']['palabras'].value=numeroDePalabras; 
+    } 
+    } 
+    </script> 
+</head> 
+
+<body> 
+<form name="pepe"> 
+<textarea onkeyup="contar(this)" cols="50" rows="10" name="texto" id="texto"></textarea> <input type="text" name="palabras" id="palabras" size="3" maxlength="3" readonly> 
+</form> 
+
+
+</body> 
+</html>  

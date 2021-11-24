@@ -1,0 +1,74 @@
+/*
+ * BusqD.java
+ *
+ * Created on 25 de julio de 2008, 16:45
+ */
+
+package PF;
+
+import SQL.*;
+import java.util.*;
+/**
+ *
+ * @author  jjlopez
+ */
+public class BusqD {
+    
+    /** Creates a new instance of BusqD */
+    public BusqD() {
+    }
+    
+    
+    public Entidad Bdasuins(Entidad ent){
+        Asuntos asu   = new Asuntos(); 
+        Vector Vbusq  = new Vector();    
+        Vector Vbusqarch  = new Vector();          
+        boolean respuesta = false;
+             String path  = "";
+          String carpeta  = "";             
+                int idrec = 0;
+                Vbusq = asu.busquedagral(" id ", "unerecibidos where idasuins = "+ent.getIdasuins() );
+
+                if(Vbusq.size()==0){
+                                       System.out.println("No existe en unerecibidos");   
+                                 carpeta = "tmpPostProduccion";
+                                 path = "C:\\AppServ\\www\\"+carpeta+"\\";
+                }else if(Vbusq.size()==1){
+                        idrec = Integer.parseInt(((Vector)Vbusq.get(0)).get(0).toString());
+                         asu  = null;
+                         asu  = new Asuntos(); 
+                        Vbusqarch = asu.busquedagral(" id_asuins ", "unedelegarchivosanex where id_asuins = "+ent.getIdasuins() );
+
+                           if(Vbusqarch.size()==0){
+                                       System.out.println("No existe en unedelegarchivosanex pero se agrego");                                                       
+                                           respuesta = asu.Insertgral(idrec, ent.getIdasuins(), ent.getEdo_archivo(), ent.getNombre(), ent.getIdusi());
+                           }else if(Vbusqarch.size()==1){
+                                       System.out.println("Existe en unedelegarchivosanex pero se actualizo");                                                                                      
+                                           respuesta = asu.Updategral(ent.getIdasuins(), ent.getEdo_archivo(), ent.getNombre(), ent.getIdusi());
+                           }
+                        
+                                 carpeta = "tmpProduccion";
+                                 path = "C:\\AppServ\\www\\"+carpeta+"\\";                          
+                            
+                }
+                 
+                ent.setPath(path);
+                ent.setRespuesta(respuesta);
+        //hay q regresar el path por q hay q saber si va a la carpeta de produccion o de postproduccion ademas de regresarle un mensaje a la delegacion de que se subio bien el archivo pero falta q se migre la info al oracle
+       return ent;
+    }
+    
+  public static void main(String args[]){
+  
+    BusqD asu   = new BusqD();
+    Entidad ent = new Entidad();
+            ent.setIdasuins(812223);
+            ent.setEdo_archivo(1);
+            ent.setNombre("juan.jpg");
+            //System.out.println(asu.Bdasuins(812223,0,"jose.jpg"));
+                asu.Bdasuins(ent);
+                System.out.println(ent.getPath());
+                System.out.println(ent.getRespuesta());
+            
+  }    
+}

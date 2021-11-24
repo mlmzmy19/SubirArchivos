@@ -1,0 +1,78 @@
+div.jsWindow {
+	position:absolute;
+	left:290px;
+	top:140px;
+	width:440px;
+	height:170px;
+	z-index:0;
+	/*background-color: #E7F7FE;*/
+	background-color: #92bbbf;
+	border: 1px solid #000000;
+}
+DIV.sizeMe {
+	FONT-SIZE: 11px; PADDING-BOTTOM: 5px; WIDTH: 120px; PADDING-TOP: 5px; FONT-FAMILY: Arial; BACKGROUND-COLOR: #009900; TEXT-ALIGN: center
+}
+#jsContent
+{
+	padding: 10px;
+	border: 1px solid #666666;
+	margin: 10px;
+	vertical-align: middle;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+	font-weight: bold;
+	height: 100px;
+
+}
+
+#jsTitle
+{
+	font-family: sans-serif, arial;
+	font-size: 11px;
+	color: #FFFFFF;
+	/*background-color: #006699;*/
+        background-color: #D5E082;
+	font-weight: bold;
+	background-position: center;
+	letter-spacing: 1px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+#jsClose
+{
+	font-family: sans-serif, arial;
+	font-size: 11px;
+	color: #FFFFFF;
+	background-color: #006699;
+	height: 25px;
+	vertical-align: middle;
+	padding-left: 0;
+	font-weight: bold;
+	background-position: center;
+	letter-spacing: 1px;
+	text-align: left;
+	float:right;
+}
+
+.jsButton {
+	font-family: sans-serif, arial;
+	font-size: 12px;
+	color: #92bbbf;
+	font-weight: bold;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	/*border-top-color: #006699;
+	border-right-color: #006699;
+	border-bottom-color: #006699;
+	border-left-color: #006699;*/
+	/*background-color: #F4FCFF;*/
+        border-top-color: white;
+	border-right-color: white;
+	border-bottom-color: white;
+	border-left-color: white;
+        background-color: white;
+}

@@ -1,0 +1,84 @@
+
+<html>
+
+<head>
+    <title> CONDUSEF ::: PROCESAR   </title>
+    <script language="JavaScript1.2" src="/procesar/scripts/validaciones.js"></script>
+</head>
+
+
+
+<body bgcolor="#eff2f5">
+
+<form name='forma1'>
+<input type="hidden" name="reqType">
+<input type="hidden" name="ctx" value="procesar">
+<TABLE cellSpacing=5 cellPadding=5 width="90%" border=0 align=center>
+<TR>
+    <TD>
+    <TABLE cellSpacing=5 cellPadding=5 border=0 align=center>
+    <TR>
+        <TD colspan='2' align=center>
+        <SPAN style="TEXT-TRANSFORM: uppercase">
+        <FONT face=Arial size=2 color=#355c8d>
+        <STRONG>Consulta a la base de datos de procesar</STRONG>
+        </FONT>
+        </SPAN>
+        </TD>
+    </TR><TR>
+        <TD COLSPAN='2'>&nbsp;</TD>
+    </TR><TR>
+        <TD ALIGN=right WIDTH='40%'>
+        <FONT face=Arial size=2>
+        <STRONG>NSS</STRONG>
+        </FONT>
+        </TD><TD>
+        <INPUT type="text" id="Nss" name="nss" size=15 maxLength=11 value="">
+        </TD>
+    </TR><TR>
+        <TD ALIGN=right>
+        <STRONG>
+        <FONT face=Arial size=2>
+        RFC     
+        </FONT>
+        </STRONG>
+        </TD><TD>
+        <INPUT type="text" id="Rfc" name="rfc" size=15 maxLength=13 value="">
+        </TD>
+    </TR><TR>
+        <TD COLSPAN='2'>&nbsp;</TD>
+    </TR><TR>
+        <TD COLSPAN='2'>
+        <p align=center>
+        <INPUT type=button name="Limpiar" id="Limpiar" value="Limpiar" onclick="return Clean(document.forma1)">
+        <INPUT type=button name="Consultar" id="Consultar" value="Consultar" >
+        </p>
+        </TD>
+    </TR>
+    </TABLE>
+    <P>&nbsp;</P>
+    <TABLE cellSpacing=1 cellPadding=1 width="75%" border=0 align=center>
+    <TR>
+        <TD align=center>
+        <SPAN style="TEXT-TRANSFORM: uppercase">
+        <FONT color="#355c8d" face=Arial size=1>
+        <STRONG>
+        INSURGENTES SUR 762, COLONIA DEL VALLE, 
+        <BR>DELEGACIÓN BENITO JUÁREZ C.P. 03100 
+        <BR>MÉXICO, D.F. 
+        <BR>TEL: 54 48 7000,
+        <BR>LADA SIN COSTO: 01 800 714 98 69
+        </STRONG>
+        </FONT>
+        </SPAN>
+        </TD>
+    </TR>
+    </TABLE>
+    </TD>
+</TR>
+</TABLE>
+<P>&nbsp;</P>
+</form>
+</body>
+</html>
+
