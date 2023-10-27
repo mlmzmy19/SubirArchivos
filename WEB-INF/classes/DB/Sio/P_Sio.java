@@ -5,9 +5,15 @@ import java.io.PrintStream;
 import java.sql.*;
 import java.util.Vector;
 import oracle.jdbc.OracleCallableStatement;
-
+import DB.Sio.logging.Log;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
 public class P_Sio
 {
+
+    Log log = new Log();
 
     public P_Sio()
     {
@@ -68,6 +74,91 @@ public class P_Sio
         return DatosTodos;
     }
 
+    public String hashSHA256(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = null;
+        try {
+                md = MessageDigest.getInstance("SHA-256");
+                md.update(password.getBytes(StandardCharsets.UTF_8));
+
+                byte[] bytes = md.digest();
+                BigInteger bi = new BigInteger(1, bytes);
+                String digest = String.format("%0" + (bytes.length << 1) + "x", bi);
+                return digest;
+        } 
+        catch (NoSuchAlgorithmException e) {		
+                e.printStackTrace();
+                return null;
+        }
+    }
+
+    
+        public Vector P_UNE_DATOSACUSE(int idasuins, int idusuario, int i1aresp)
+    {
+        Vector DatosUnicos = new Vector();
+        Vector DatosTodos = new Vector();
+        int y = 0;
+        Conexion_oracle pool = new Conexion_oracle();
+        try
+        {
+            Connection conn = Conexion_oracle.getConnection();
+            DatosUnicos.clear();
+            DatosTodos.clear();
+            System.out.println("Lamando al procedimiento  P_UNE_DATOSACUSE del oracle");
+            System.out.println("idasuins: " + idasuins+"  idusuario: "+idusuario);
+            System.out.println("");
+            CallableStatement cs;
+            ResultSet rs;
+            if (i1aresp==1) {
+                cs = conn.prepareCall("{ call  P_UNE_DATOSACUSE(?,?,?,?)} ");
+                cs.setInt(1, idasuins);
+                cs.setInt(2, idusuario);
+                cs.registerOutParameter(3, -10);
+                cs.setInt(4, 1);
+                cs.execute();
+                rs = ((OracleCallableStatement)cs).getCursor(3);
+            } else {
+                cs = conn.prepareCall("{ call  P_UNE_DATOSACUSE(?,?,?)} ");
+                cs.setInt(1, idasuins);
+                cs.setInt(2, idusuario);
+                cs.registerOutParameter(3, -10);
+                cs.execute();
+                rs = ((OracleCallableStatement)cs).getCursor(3);                
+            }
+            ResultSetMetaData RSMD = rs.getMetaData();
+            DatosTodos.clear();
+            do
+            {
+                if(!rs.next())
+                {
+                    break;
+                }
+                if(rs.getString(1) != null)
+                {
+                    for(int t = 1; t <= RSMD.getColumnCount(); t++)
+                    {
+                        DatosUnicos.add(rs.getString(t));
+                    }
+
+                    DatosTodos.add(y, DatosUnicos.clone());
+                    y++;
+                    DatosUnicos.clear();
+                }
+            } while(true);
+            cs.close();
+            rs.close();
+            conn.close();
+            conn = null;
+        }
+        catch(Exception e)
+        {
+            //System.out.println(e);
+            log.escribe("Error: "+e);
+        }
+        return DatosTodos;
+
+    }
+
+    
     public Vector getListado_Folio(String folio)
     {
         Vector DatosUnicos = new Vector();

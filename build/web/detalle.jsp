@@ -18,13 +18,24 @@
     <link href="js/especiales/libPOP/greybox/gb_styles.css" rel="stylesheet" type="text/css" media="all" />      
     <link href="css/estilos.css" rel="stylesheet" type="text/css">
 <%
-String valid      = "";
-String sLigaSIGEDet = "";
+    String valid      = "";
+    String sLigaSIGEDet = "";
 
-       valid = request.getParameter("valid");   
-       
-       
-       
+    valid = request.getParameter("valid");   
+
+    int iAcuse=0;
+    int iAcuse1aResp=0;
+    int iConcluido=0;
+    int i1aresp=0;
+    int iAnioMes=0;
+    
+    //int idel=0;
+    
+    String sTipoDoc="";   
+    String sTipoDoc1aResp="";  
+    String sExtAnex_1aresp=".zip"; //Extensión arrchivo anexo 1a resp
+    String s="";
+    
 if(valid!=null){
 
     if(valid.equals("udepo")){
@@ -76,6 +87,7 @@ if(valid!=null){
         if(vLiga.size()>0){
             //out.println(((Vector)vLiga.get(0)).get(0));
             sLigaSIGEDet=((Vector)vLiga.get(0)).get(0).toString();
+            //idel=Integer.parseInt(((Vector)vLiga.get(0)).get(1).toString());
         }else{
             
             sLigaSIGEDet="http://webapps.condusef.gob.mx/unes/detalleStatus.jsp";
@@ -116,25 +128,72 @@ if(valid!=null){
         //dbsio = new BD_Sio();
         Vector vLiga_docts_2 = new Vector();
         vLiga_docts_2.clear();        
-        vLiga_docts_2=dbsio2.busquedagral(" f_url_aplicacion(14) "," dual "); 
+        vLiga_docts_2=dbsio2.busquedagral(" f_url_aplicacion(14), extract(year from f_respuesta)*100+extract(month from f_respuesta) as AnioMes "," unerecibidos where idasuins="+id_asuins); 
         //VLigaArchivos = con.busquedagral("select f_une_aplicacion(2) from dual");
         if(vLiga_docts_2.size() > 0)
         {
             ligaArchivosUNES_2 = (String)((Vector)vLiga_docts_2.get(0)).get(0);
+            s=(String)((Vector)vLiga_docts_2.get(0)).get(1);
+            if (s!=null) {
+                iAnioMes = Integer.parseInt(s);
+            }
         } 
 
         //********Para la poliza y vigencia*******
         
         String idcau = "";
-        System.out.println("Hasta aqui paso sin problemas");
+        System.out.println("Hasta aqui paso sin problemas iAnioMes: "+iAnioMes);
         Vector Vcausa = new Vector();
-        Vcausa=dbsio2.busquedagral(" F_ASUINS_IDCAUOK("+id_asuins+") "," dual ");
+        //Vcausa=dbsio2.busquedagral(" F_ASUINS_IDCAUOK("+id_asuins+"), (select count(*) from unerecibidos where f_respuesta is not null and idasuins="+ id_asuins +") "," dual ");
+        Vcausa=dbsio2.busquedagral(" F_ASUINS_IDCAUOK("+id_asuins+") as uno, (select count(*) from unerecibidos where f_respuesta is not null and idasuins="+id_asuins+") as dos, (select count(*) from uneacuses1aresp where idasuins="+id_asuins+") as dos2, (select max(tipodoc) from unetipodocrespuesta where id=(select max(idtipdoc) from unearchivos where id_asuins="+id_asuins+")) as tres,    (select max(tipodoc) from unetipodocrespuesta where id=(select max(idtipdoc) from unearchivos1aresp where id_asuins="+id_asuins+")) as cuatro, (select max(substr(nombre,instr(nombre,'.'))) from unearchivosanex1aresp where id_asuins="+id_asuins+") as cinco"," dual ");
         System.out.println("Hasta aqui paso sin problemas: "+((Vector)Vcausa.get(0)).get(0));
         idcau = ((Vector)Vcausa.get(0)).get(0).toString(); 
+        s=(String)((Vector)Vcausa.get(0)).get(1);
+        if (null != s) {
+            iConcluido = Integer.parseInt(s);
+        } else {
+            iConcluido=0;
+        }
+        s=(String)((Vector)Vcausa.get(0)).get(2);
+        if (null != s) {
+            iAcuse1aResp = Integer.parseInt(s);
+        } else {
+            iAcuse1aResp=0;
+        }
+        sTipoDoc = (String)((Vector)Vcausa.get(0)).get(3);
+        if (null == sTipoDoc) {
+            sTipoDoc="";
+        }
         
+        sTipoDoc1aResp = (String)((Vector)Vcausa.get(0)).get(4); 
+        if (null == sTipoDoc1aResp) {
+            sTipoDoc1aResp="";
+        }
+        sExtAnex_1aresp= (String)((Vector)Vcausa.get(0)).get(5); 
+        if (null == sExtAnex_1aresp) {
+            sExtAnex_1aresp="";
+        }
         if (idcau.equals("778")){
             
         }
+
+        Vector vAcuse = new Vector();
+        
+        vAcuse = dbsio2.busquedagral(" case when f_une_conclusion("+id_asuins+")>=f_une_fecha_acuses then '1' else '0' end, f_une_asuins_con_1aresp("+id_asuins+") as i1aresp ","dual");
+        s=(String)((Vector)vAcuse.get(0)).get(0);
+        if (null != s) {
+            iAcuse =Integer.parseInt(s);
+        } else {
+            iAcuse=0;
+        }
+        String s1aresp;
+        s1aresp                 = (String)((Vector)vAcuse.get(0)).get(1);
+        
+        
+        if (null != s1aresp) {
+            i1aresp=Integer.parseInt(s1aresp);
+        }        
+
         //********Fin de la poliza y vigencia
 %>
 
@@ -525,6 +584,8 @@ Detalle de Asunto
              out.println("&nbsp;");
         }
         %>
+        
+        <!-- br>< %=ligaArchivosUNES %> - < %=ligaArchivosUNES_2% > - < %=iAnioMes% -->
      </td>
   </tr>  
 <%
@@ -576,89 +637,122 @@ Detalle de Asunto
 
         <%  
             
-          if( !((Vector)v_detalle.get(0)).get(11).toString().equals("515") || id_asuins.equals("4483273") )
-          {
+        if( !((Vector)v_detalle.get(0)).get(11).toString().equals("515") || id_asuins.equals("4483273") ) {
             if("Concluido".equals(request.getParameter("status"))){
-        %>
-        
 
+                if (iAnioMes>202211) {
+                    out.println("<b>Datos conclusión SIGE.</b>");
+                } else {
+                    out.println("<p style='color: #003366'><b>Documento de respuesta al Usuario por la IF.</b> ");
+                }
+                if (sTipoDoc.length()>0) { 
+                    out.println("("+sTipoDoc+")"); 
+                }
         
-                <%//if (archivo1.size()==0){%>
-                    Documento de <%if(((Vector)v_detalle.get(0)).get(13).toString().equals("1")){%> 2°<%}%> respuesta al Usuario            
-                    &nbsp;   
+                //Datos <%if(((Vector)v_detalle.get(0)).get(13).toString().equals("1")){% > 2°<%}% > conclusión SIGE&nbsp;
+                //<% if (sTipoDoc.length()>0) { out.println("("+sTipoDoc+")"); } % >
+
+
+                if(((Vector)v_detalle.get(0)).get(10)!=null){
+
+                    if(Integer.parseInt(((Vector)v_detalle.get(0)).get(10).toString())>=621 && Integer.parseInt(((Vector)v_detalle.get(0)).get(10).toString())<=626){
+                        %>
+                        <a href="plantilla/doctoNC.jsp?pidAsuIns=<%=id_asuins%>&nombre=<%=request.getParameter("nombre")%>&idinsttmp=<%=((Vector)v_detalle.get(0)).get(8)%>&ban_sr=0" target="_blank" >
+                              <img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'>
+                        </a>                       
+                        <%
+                    } else {
+                        %>
+
+                        <a href="plantilla/docto.jsp?pidAsuIns=<%=id_asuins%>&nombre=<%=request.getParameter("nombre")%>&idinsttmp=<%=((Vector)v_detalle.get(0)).get(8)%>&ban_sr=0" target="_blank" >
+                              <img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'>
+                        </a>            
+                        <%  
+                    }
+                }   
+                if (iAnioMes<=202211) {
+                    out.println("</p> ");
+                }
+
+                out.println("<br>");
+
+                if (archivo1.size()>0){
+                    if (iAnioMes>202211) {
+                        out.println("<p style='color: #003366'><b>Carta de Respuesta para el usuario</b> ");
+                    } else {
+                        out.println("<b>Documento anexo de respuesta al Usuario por la IF.</b> ");
+                    }
+                    String ext_tmp  ="";
+                    String ext_tmp_1="";
+                    if(((Vector)archivo1.get(0)).get(4)!=null){
+                       ext_tmp   = (String)((Vector)archivo1.get(0)).get(4);
+                       String [] ext_tmp2 = ext_tmp.split("\\.");
+                       if(ext_tmp2.length==2)
+                        ext_tmp_1 = ext_tmp2[1];
+
+
+                    }
+                    out.println("&nbsp;&nbsp;<a href='"+ligaArchivosUNES_2+"ofic_resol/"+id_asuins+"."+ext_tmp_1+"' target='_blank'><img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'></a> &nbsp;&nbsp;&nbsp;");
+                    if (iAnioMes>202211) {
+                        out.println("</p> ");
+                    }
+                }
                     
-                    <%//=id_asuins%>
-                    <%if(((Vector)v_detalle.get(0)).get(10)!=null){
-                        
-                          if(Integer.parseInt(((Vector)v_detalle.get(0)).get(10).toString())>=621 && Integer.parseInt(((Vector)v_detalle.get(0)).get(10).toString())<=626){
-                    %>
-                    <a href="plantilla/doctoNC.jsp?pidAsuIns=<%=id_asuins%>&nombre=<%=request.getParameter("nombre")%>&idinsttmp=<%=((Vector)v_detalle.get(0)).get(8)%>&ban_sr=0" target="_blank" >
-                          <img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'>
-                    </a>                       
-                    <%
-                            }else{
-                    %>
-                    
-                    <a href="plantilla/docto.jsp?pidAsuIns=<%=id_asuins%>&nombre=<%=request.getParameter("nombre")%>&idinsttmp=<%=((Vector)v_detalle.get(0)).get(8)%>&ban_sr=0" target="_blank" >
-                          <img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'>
-                    </a>            
-                    <%  
-                            }
-                        }   
-                    %>
-                   
-                    <br>
-                    
-                    <%//if (archivo1!=null){%>
-                    <%if (archivo1.size()>0){%>
-                <%//}else{
-                            out.println("Documento anexo de respuesta al Usuario por la IF. ");
-                            String ext_tmp  ="";
-                            String ext_tmp_1="";
-                                if(((Vector)archivo1.get(0)).get(4)!=null){
-                                   ext_tmp   = (String)((Vector)archivo1.get(0)).get(4);
-                                   String [] ext_tmp2 = ext_tmp.split("\\.");
-                                   if(ext_tmp2.length==2)
-                                    ext_tmp_1 = ext_tmp2[1];
-                                   
-                                   
-                                }
-                            
-                                
-                            //out.println("&nbsp;&nbsp;<a href='http://webapps.condusef.gob.mx/UNES/ofic_resol/"+id_asuins+"."+ext_tmp_1+"' target='_blank'><img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'></a> &nbsp;&nbsp;&nbsp;");
-                                out.println("&nbsp;&nbsp;<a href='"+ligaArchivosUNES_2+"ofic_resol/"+id_asuins+"."+ext_tmp_1+"' target='_blank'><img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'></a> &nbsp;&nbsp;&nbsp;");
-                  //  }%>
-                    <%}%>
-                    
-                <%if (archivo2.size()>0){
+                if (archivo2.size()>0){
                      try{
                             String ext2_tmp="";
                                    ext2_tmp = (String)((Vector)archivo2.get(0)).get(4);
                                    String [] ext2_tmp2 = ext2_tmp.split("\\.");
                                   
-
-                            %>
-                          
-                    <br>
-                    Documento anexo.            
-                    &nbsp;        
-          <% 
-                        
-                    //out.println("&nbsp;&nbsp;<a href='http://webapps.condusef.gob.mx/UNES/ofic_anex/"+id_asuins+"."+ext2_tmp2[1]+"' target='_blank'><img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'></a> &nbsp;&nbsp;&nbsp;"); 
-          out.println("&nbsp;&nbsp;<a href='"+ligaArchivosUNES_2+"ofic_anex/"+id_asuins+"."+ext2_tmp2[1]+"' target='_blank'><img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'></a> &nbsp;&nbsp;&nbsp;"); 
-          %>
-
-                        
-                <%
+                            if (iAnioMes>202211) {
+                                out.println("<br>Anexo de documentos probatorios.&nbsp;");
+                            } else { 
+                                out.println("<br>Archivo(s) anexo(s).&nbsp;");
+                            }
+                            out.println("&nbsp;&nbsp;<a href='"+ligaArchivosUNES_2+"ofic_anex/"+id_asuins+"."+ext2_tmp2[1]+"' target='_blank'><img src='img/doc.jpg' alt='Mostrar la carta'  name='Image10' border='0'></a> &nbsp;&nbsp;&nbsp;"); 
                        }catch(Exception ex){System.out.println("Error de archivo="+ex);}
-                 }
-                %>                    
-                
-        <%}%>
+                }
+                if (iConcluido==1) {          
+                    if (iAcuse==1) { %>
+                        <br>Acuse de Resolución de Asunto&nbsp;&nbsp;
+                        <a href="acuse.jsp?id_usuario=2609&id_asuins=<%=id_asuins%>&id_ins=<%=idins%>&i1aresp=0" target="_blank" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','img/doc1.jpg',1)">   <img src="img/doc.jpg" alt="Mostrar la carta"  name="Image10" border="0"></a>
+                    <% } 
+                } else { %>
+                    <br><p style="color:  darkred"><b>ASUNTO NO CONCLUIDO</b>&nbsp;&nbsp;</p>     
+                <%}
+                if (i1aresp>=2 ) { %>
+                    <br><hr>
+                    <p>
+                        <h3 style="color: #003366">HISTORIAL 1a. RESPUESTA</h3>
+                        Carta de Respuesta para el usuario(No aceptada) <% if (sTipoDoc1aResp.length()>0) { out.println("("+sTipoDoc1aResp+")"); } %>
+                    <a href='<%=ligaArchivosUNES_2%>ofic_resol/<%=id_asuins%>_1aresp.pdf' target='_blank' onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','img/doc1.jpg',1)"> <img src="img/doc1.jpg" alt="Mostrar la carta"  name="Image10" border="0"></a>  <!-- Produccion -->
+                    </p> 
+             <%     if (i1aresp==3) { %>
+                        <p>Anexo de documentos probatorios
+                        <a href='<%=ligaArchivosUNES_2%>ofic_anex/<%=id_asuins%>_1aresp<%=sExtAnex_1aresp%>' target='_blank' onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','img/doc1.jpg',1)"> <img src="img/doc1.jpg" alt="Mostrar la carta"  name="Image10" border="0"></a></p>  <!-- Produccion -->
+                    <%}
+                }
+                if (iAcuse1aResp>0) { %>
+                        <p>Acuse de 1a. Respuesta
+                   <a href="acuse.jsp?id_usuario=2609&id_asuins=<%=id_asuins%>&id_ins=<%=idins%>&i1aresp=1" target="_blank" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image10','','img/doc1.jpg',1)">   <img src="img/doc1.jpg" alt="Mostrar la carta"  name="Image10" border="0"></a> </p>
+                <%   }
+                if (i1aresp>=1 && iAcuse1aResp==0) { %>
+                   <p><b>No se emitió Acuse</b></p>
+                <%   }
+
+                }%>
             
      </td>
-  </tr>   
+        <tr align="center">
+                <td class='lbl_detalle' style='background-color:white;'>
+                    Versión 1.0.2
+                </td>
+        </tr>     
+    </tr>   
+    <tr>
+      
             <%}}%>  
+    </tr>
 </table>
 <p>&nbsp;</p>
 <%      }

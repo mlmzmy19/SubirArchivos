@@ -77,7 +77,7 @@ if(id_del!=null && f_inicio!=null && f_final!=null)
 <%for(int i=0; i < v_listado.size(); i++){%>
    <form name='<%=i%>'>
     <tr>
-        <td   bgcolor='gray' style='color:white' style="border-style:inset; border-top-width:1px; border-left-width:1px; border-right-width:0px; border-bottom-width:0px; border-color:#999999;padding:0px;  filter:alpha(opacity: 100); font-size='10pt'" width='25' align=center > 
+        <td   bgcolor='gray' style='color:white' style="border-style:inset; border-top-width:1px; border-left-width:1px; border-right-width:0px; border-bottom-width:0px; border-color:#999999;padding:0px;  filter:alpha(opacity: 100); font-size:10pt" width='25' align=center > 
              
             <b><%=i+1%></b>
             

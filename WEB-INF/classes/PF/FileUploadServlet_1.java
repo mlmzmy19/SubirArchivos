@@ -134,10 +134,10 @@ public class FileUploadServlet_1 extends HttpServlet
                      System.out.println("ya le puso el fondo");
                     
                      
-    /*************************** SISTEMAS *******************************************/  
+    /*************************** SISTEMAS ******************************************* /  
      /* System.out.println(uploadedFile.getAbsolutePath()+"ruta de archivo<> ");
           System.out.println("ruta Final del archivo:"+ uploadedFile.getAbsolutePath());
-         System.out.println("nombre del archivo:"+ uploadedFile.getName());*/
+         System.out.println("nombre del archivo:"+ uploadedFile.getName());* /
          
         cliente firma = new cliente();
    

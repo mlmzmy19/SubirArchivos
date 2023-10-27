@@ -47,7 +47,38 @@ response.setHeader("Pragma","no-cache");
             <td align=center>
                     <div id='inicializando' style='visibility:hidden'><img src='../img/subirArchivo.gif'></div>
             </td>
+            <td align=right>
+            <script type="text/javascript">
+            MyFunction = function(){
+            const btn = document.querySelector('#btn');
+            btn.addEventListener('click', (event) => {
+            let checkboxes = document.querySelectorAll('input[name="id"]:checked');
+            let values = [];
+            checkboxes.forEach((checkbox) => {
+                values.push(checkbox.value);
+            });
+            alert(values);
+            });    
+            }
+            <!--/script>
+                <input type="checkbox" name= "id" id="cbox1" value="Firmar" > Firmar<br>
+                <input type="checkbox" name= "id" id="cbox1" value="Sellar"> Sellar<br>
+                <button type="button" id="btn" onclick= 'javascript:MyFunction()'>Get</button>
+            </td-->
         </tr>
      </table>
+            
+            <%
+             String s[] = request.getParameterValues("cbox");
+            if (s != null && s.length != 0) {
+                out.println("You have selected the option is: ");
+                for (int i = 0; i < s.length; i++) {
+                    out.println(s[i] + "\n" + "Thank you");
+                }
+            }
+             else{
+                        out.println("You ");
+                        }
+                %>
 </body>
 </html>

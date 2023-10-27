@@ -38,10 +38,10 @@ public class Conexion_oracle
             connectDescriptor = "(DESCRIPTION=(LOAD_BALANCE=yes)(ADDRESS=(PROTOCOL=TCP)(HOST=10.33.1.176)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=siobk2d)))";
             conn = DriverManager.getConnection("jdbc:oracle:thin:@" + connectDescriptor, "sio", "siodesa");
             */
-            connectDescriptor = "(DESCRIPTION=(LOAD_BALANCE=yes)(ADDRESS=(PROTOCOL=TCP)(HOST=10.33.1.176)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=siobk2D)))";
-            //connectDescriptor = "(DESCRIPTION=(LOAD_BALANCE=yes)(ADDRESS=(PROTOCOL=TCP)(HOST=scan-prod.condusef.gob.mx)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=siobk2)))";
-            //conn = DriverManager.getConnection("jdbc:oracle:thin:@" + connectDescriptor, "SIO", "siodesarrollo");
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@" + connectDescriptor, "sio", "desarrollo176");
+            //connectDescriptor = "(DESCRIPTION=(LOAD_BALANCE=yes)(ADDRESS=(PROTOCOL=TCP)(HOST=10.33.1.176)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=siobk2D)))";
+            //conn = DriverManager.getConnection("jdbc:oracle:thin:@" + connectDescriptor, "sio", "desarrollo176");
+            connectDescriptor = "(DESCRIPTION=(LOAD_BALANCE=yes)(ADDRESS=(PROTOCOL=TCP)(HOST=scan-prod.condusef.gob.mx)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=siobk2)))";
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@" + connectDescriptor, "SIO", "siodesarrollo");
             
             
             

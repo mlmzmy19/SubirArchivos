@@ -64,7 +64,7 @@ function oculto(num) {
 <!--<link href="css/estilos.css" rel="stylesheet" type="text/css">-->
 <table border="0" align="center">
 <tr>
-        <td colspan='10' style='font-family: Arial, Helvetica, sans-serif;font-size: 14px,color: 494B49;text-align:center;'>
+        <td colspan='10' style='font-family: Arial, Helvetica, sans-serif;font-size: 14px; color: 494B49;text-align:center;'>
         <p align=center>
         <b>Reporte para dar seguimiento en el SIO a los asuntos con respuesta de la Instituci&oacute;n Financiera
         <br>Periodo de <%=sinicio.substring(0,2)+"/"+sinicio.substring(2,4)+"/"+sinicio.substring(4,8)%> a <%=stermino.substring(0,2)+"/"+stermino.substring(2,4)+"/"+stermino.substring(4,8)%></b>
@@ -91,7 +91,7 @@ function oculto(num) {
     <% for(int i=0;i<tabla.size();i++){ %>
     <% filas = (ArrayList)tabla.get(i); %>    
     <tr>
-        <td    bgcolor='gray' style='color:white' style="border-style:inset; border-top-width:1px; border-left-width:1px; border-right-width:0px; border-bottom-width:0px; border-color:#999999;padding:0px;  filter:alpha(opacity: 100); font-size='10pt'" width='25' align=center><div id='<%="capa1_"+i%>'><input type="checkbox" name="c<%=i%>" onclick='activa(<%=i%>)'></div></td>
+        <td    bgcolor='gray' style='color:white' style="border-style:inset; border-top-width:1px; border-left-width:1px; border-right-width:0px; border-bottom-width:0px; border-color:#999999;padding:0px;  filter:alpha(opacity: 100); font-size:10pt" width='25' align=center><div id='<%="capa1_"+i%>'><input type="checkbox" name="c<%=i%>" onclick='activa(<%=i%>)'></div></td>
         <td valign=top style="border-style:solid; border-top-width:1px; border-left-width:1px; border-right-width:1px; border-bottom-width:1px; border-color:#999999;padding:3px; background-color:white; filter:alpha(opacity: 100);"><%=filas.get(1)%></td>
         <td valign=top style='font-family: Arial, Helvetica, sans-serif;font-size: 12px;font-weight:normal;color:494B49;text-align:left;font-style: normal;'><%=filas.get(3)%></td>
         <td valign=top style='font-family: Arial, Helvetica, sans-serif;font-size: 12px;font-weight:normal;color:494B49;text-align:left;font-style: normal;'><%=filas.get(4)%></td>

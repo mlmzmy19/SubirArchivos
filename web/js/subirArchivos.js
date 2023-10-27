@@ -111,16 +111,16 @@ function comprueba_extension(formulario, archivo) {
    if (!archivo) { 
    
       //Si no tengo archivo, es que no se ha seleccionado un archivo en el formulario 
-       mierror = "No has seleccionado ningún archivo"; 
+       mierror = "No has seleccionado ningï¿½n archivo ass"; 
        alert(mierror);
        return false;
    }else{ 
 
-      //recupero la extensión de este nombre de archivo 
+      //recupero la extensiï¿½n de este nombre de archivo 
       extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase(); 
       //alert(extension);
       //alert (extension); 
-      //compruebo si la extensión está entre las permitidas 
+      //compruebo si la extensiï¿½n estï¿½ entre las permitidas 
       permitida = false; 
       for (var i = 0; i < extensiones_permitidas.length; i++) { 
          if (extensiones_permitidas[i] == extension) { 
@@ -129,7 +129,7 @@ function comprueba_extension(formulario, archivo) {
          } 
       } 
       if (!permitida) { 
-         mierror = "Comprueba la extensión de los archivos a subir. \nSólo se pueden subir archivos con extensiones: " + extensiones_permitidas.join(); 
+         mierror = "Comprueba la extensiï¿½n de los archivos a subir. \nSï¿½lo se pueden subir archivos con extensiones: " + extensiones_permitidas.join(); 
          alert (mierror);
        }else{ 
           //submito! 
@@ -163,15 +163,12 @@ setTimeout("alert(document.getElementById('fotoFinal').fileSize)",50000);
  return false;
 */
     if(comprueba_extension(form,valor)){
-           document.getElementById("inicializando" ).style.visibility = "visible";    
+           document.getElementById("inicializando" ).style.visibility = "visible";
            return true;
     }else{
         return false;
     }
 }
-
-
-
 
 function showSize(f) {
 

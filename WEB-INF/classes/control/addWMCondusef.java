@@ -32,7 +32,14 @@ public class addWMCondusef {
         int alto = 0;
         int ancho= 0;                
        
-        String pathimg  = "C:/AppServ/www/img/"; //contexto.replace("\\build\\web\\", "\\web\\imgs\\");
+        //String pathimg  = "C:/AppServ/www/img/"; //contexto.replace("\\build\\web\\", "\\web\\imgs\\");
+        String pathimg;
+        if (contexto.indexOf("808")>0) 
+            pathimg= contexto+"\\imgs\\";
+        else
+            pathimg= contexto+"/imgs/";
+        
+          
         System.out.println("el contexto es: "+contexto);
         //String pathimg  = contexto.replace("\\build\\web\\", "\\web\\imgs\\");  
         //pathimg  = "/u01/middle_OHS/user_projects/domains/CONDUSEF_OHS2_domain/config/fmwconfig/components/OHS/instances/ohs1/htdocs/images/";

@@ -21,7 +21,7 @@ response.setHeader("Cache-Control","no-cache");
 response.setHeader("Pragma","no-cache");
     String validar = "";
            validar = request.getParameter("validarUSR");
-           //validar = "CONDUSEF_udepo";
+           validar = "CONDUSEF_udepo";
            if(validar!=null && validar.equals("CONDUSEF_udepo")){
 %>
 
@@ -51,7 +51,7 @@ response.setHeader("Pragma","no-cache");
         System.out.println("Va a coupar por primera vez el metodo busquedagral");
         
                 //Varchivos = Iarchivos.P_DOCSDELEG_ASUINS(idasuins);
-                Varchivos = Iarchivos.busquedagral(" uned.id_asuins,uned.consecutivo,to_char(uned.fecha,'dd/mm/yyyy'),uned.nombre,uned.extension,uned.checked,uned.comentario_archivo,uner.id "," unedelegarchivosanex uned left join  unerecibidos uner on uned.id_asuins=uner.idasuins where uned.id_asuins="+idasuins+" order by uned.consecutivo ");
+                Varchivos = Iarchivos.busquedagral(" uned.id_asuins,uned.consecutivo,uned.fecha,uned.nombre,uned.extension,uned.checked,uned.comentario_archivo,uner.id "," unedelegarchivosanex uned left join  unerecibidos uner on uned.id_asuins=uner.idasuins where uned.id_asuins="+idasuins+" order by uned.consecutivo ");
                 
                 /*
                 PLSQLNamedProgram P_DOCSDELEG_ASUINS = PLSQLNamedProgram.Procedure("P_DOCSDELEG_ASUINS",new Conexion().SIGEProduccion(),
@@ -292,7 +292,7 @@ response.setHeader("Pragma","no-cache");
         </tr>    
         <tr align="center">
                 <td class='lbl_detalle' style='background-color:white;'>
-                    Versión 1.0.0
+                    Versión 1.0.2
                 </td>
             </tr>
     </table>

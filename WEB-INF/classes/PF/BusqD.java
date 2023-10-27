@@ -26,10 +26,12 @@ public class BusqD
         Vbusq = asu.busquedagral(" id ", "unerecibidos where idasuins = " + ent.getIdasuins() + " and rownum<2");
         
         //path = "C:/AppServ/www/archivos_prueba";   //definir path de maquina para pruebas
+        //path = "C:\\Users\\miguemtz\\Documents\\IOMEGA_320\\e\\Documents\\Visual Studio 2010\\Projects\\AppsMiguel\\SA\\subirArchivos\\archivos\\";   //definir path de maquina para pruebas
         //path = "C:\\doc\\archivos_prueba\\";   //definir path de maquina para pruebas
         
         
         path = "/archpdf/DELEGUNES/";//PRODUCCION
+        
         //path = "//doc/archivos_prueba";
         
         String tam2 = ent.getNombre();

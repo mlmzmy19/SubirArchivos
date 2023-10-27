@@ -20,7 +20,7 @@
 <%
 int pidAsuIns=0;
 
-String unidadAdministrativa = "Subdelegaci&oacute;n";
+String unidadAdministrativa = "Unidad de Atenci&oacute;n a Usuarios";
 BD_Sio consulta = new BD_Sio();
 Vector vunidadadministrativa = new Vector();
 Vector URL_LOGO_INST = new Vector();
@@ -48,6 +48,9 @@ String Folio_cond="";
         Folio_cond=(String)((Vector) asu_ofi.get(0)).get(0);
     }
 
+String Dato40="";
+        Dato40=(String)((Vector) asu_ofi.get(0)).get(40);
+        if(Dato40==null) Dato40="--";
 
 vunidadadministrativa = consulta.busquedagral("f_unidad_administrativa("+pidAsuIns+")","dual");
 
@@ -424,6 +427,11 @@ if( vunidadadministrativa.size()!=0 )
                                                                                                     %>
 												<p>
 												<%=Dato4%>
+                                                                                                <% if (Dato40.length()>10) { %>
+                                                                                                    <br><p>
+                                                                                                    <%=Dato40%>
+                                                                                                    </p>
+                                                                                                <% } %>                                                                                                
 												<!--La tarjeta de crédito que nos ocupa presenta un saldo deudor de $3,377 pesos y considerando la solicitud de nuestro cliente, 
 												le ofrecemos un plan de apoyo de la siguiente forma:</p>
 												<p>&nbsp;</p>

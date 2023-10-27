@@ -48,6 +48,10 @@ response.setHeader("Pragma","no-cache");
             <td align=center>
                     <div id='inicializando' style='visibility:hidden'><img src='../img/subirArchivo.gif'></div>
             </td>
+            <!--td align=right>
+                <input type="checkbox" id="cbox2" value="first_checkbox"> Firmar<br>
+                <input type="checkbox" id="cbox2" value="second_checkbox"> Sellar<br>
+            </td-->
         </tr>
      </table>
 </body>
